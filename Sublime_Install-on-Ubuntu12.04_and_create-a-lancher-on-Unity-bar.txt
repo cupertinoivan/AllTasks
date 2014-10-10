@@ -1,0 +1,54 @@
+http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/
+I’ve made this tutorial because there’s no installer for the Linux versions of Sublime Text.
+I will show you how to integrate Sublime Text to Unity
+So let’s get on with this. Here is my how to install Sublime Text on Ubuntu tutorial.
+[This tutorial has been updated following feedback from AskUbuntu. Also, you need to do these steps using your login. Do not start by typing "sudo -s"!]
+
+
+Step 1 – Download
+Download the tar file that suits you best and extract it. http://www.sublimetext.com/
+$ tar xvf Sublime\ Text\ 2.0.1\ x64.tar.bz2
+$ mv SublimeText2.0.2\ x64.tar.bz2 Sublime
+Step 2
+You’ll get a “Sublime Text 2″ folder after extraction.
+his folder contains all the files that Sublime Text will need.
+$ sudo mv Sublime\ Text\ 2  /opt/
+
+
+Step 3
+Now you’d want to be able to call Sublime Text from the Terminal by just typing “sublime”.
+To do that, we’ll just create a symbolic link in “/usr/bin” like thus:
+$ sudo ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/sublime
+
+Step 4
+Now that our files are at the right place, we need to create a launcher in Unity.
+
+To do this, we’re going to create a .desktop file in “/usr/share/applications”:
+$ sudo vi /usr/share/applications/sublime.desktop
+
+And paste the following content:
+[Desktop Entry]
+Version=1.0
+Name=Sublime Text 2
+# Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
+# From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
+GenericName=Text Editor
+
+Exec=sublime
+Terminal=false
+Icon=/opt/Sublime Text 2/Icon/48x48/sublime_text.png
+Type=Application
+Categories=TextEditor;IDE;Development
+X-Ayatana-Desktop-Shortcuts=NewWindow
+[NewWindow Shortcut Group]
+Name=New Window
+Exec=sublime -n
+TargetEnvironment=Unity
+As you can see, these lines are quite straightforward. Go ahead and experiment a bit with them.
+
+Step 5
+Now you would probably want to open all text files with Sublime Text 2.
+The easiest way to do that is to open up the file associations list:
+sudo sublime /usr/share/applications/defaults.list
+And replace all occurrences of gedit.desktop with sublime.desktop. Tada ! There you go. You now have Sublime Text 2 installed on Unity on Ubuntu 12.04, like a pro. Here are some screenshots:
+
